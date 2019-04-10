@@ -1,0 +1,43 @@
+{
+    "name": "ags/google-re-captcha-v3",
+    "description": "reCAPTCHA v3 returns a score for each request without user friction",
+    "type": "craft-plugin",
+    "version": "1.0.3",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "google  recaptcha v3"
+    ],
+    "support": {
+        "docs": "https://github.com/Andr3y9603/google-re-captcha-v3/blob/master/README.md",
+        "issues": "https://github.com/Andr3y9603/google-re-captcha-v3/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ghiorghiu Andrei",
+            "homepage": "https://github.com/Andr3y9603"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+            "ags\\googlerecaptchav3\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Google  reCAPTCHA v3",
+        "handle": "google-re-captcha-v3",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/Andr3y9603/google-re-captcha-v3/master/CHANGELOG.md",
+        "components": {
+            "recaptchaV3": "ags\\googlerecaptchav3\\services\\RecaptchaV3"
+        },
+        "class": "ags\\googlerecaptchav3\\GoogleRecaptchaV3"
+    }
+}

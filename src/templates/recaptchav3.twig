@@ -1,0 +1,58 @@
+<script src='https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render=##siteKey##' async defer></script>
+<script type="text/javascript">
+
+    const forms = document.querySelectorAll("form");
+
+    for (var i = 0; i < forms.length; i++) {
+        const form = forms[i];
+        form.onsubmit = checkReCaptcha;
+    }
+
+    var recaptcha;
+    var ReCaptchaCallbackV3 = function() {
+        grecaptcha.ready(function() {
+            grecaptcha.execute("##siteKey##").then(function(token) {
+                recaptcha = token;
+            });
+        });
+            
+    };
+
+
+    function checkReCaptcha() {
+        makeRequest('GET', "actions/google-re-captcha-v3/re-captcha-v3?recaptcha="+recaptcha)
+        .then( (resp) => {
+          if(resp === true) {
+            this.onsubmit = '';
+            this.submit();
+          }
+        })
+        .catch((err) => {
+            return false;
+        });
+
+        return false;
+        
+    }
+
+
+    function makeRequest(method, url) {
+        return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url);
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                  if(!!xhr.responseText === true) {
+                    resolve(true);
+                  } else {
+                    resolve(false);
+                  }
+                }
+            };
+            xhr.onerror = function () {
+              resolve(false);
+            };
+            xhr.send();
+        });
+    }
+</script>
